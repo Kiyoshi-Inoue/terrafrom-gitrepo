@@ -67,8 +67,6 @@ jobs:
       # Deploymentを終了する
       - name: Finish Deployment
         uses: bobheadxi/deployments@master
-        # terraform planで差分があるときのみ実行
-        if: ${{ always() && steps.plan.outputs.tf_actions_plan_has_changes == 'true' }}
         with:
           step: finish
           token: ${{ secrets.TF_GITACT}}
