@@ -8,7 +8,7 @@ on:
 env:
   tf_version: '1.4.2'
   tf_work_dir: '.'
-  GITHUB_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.TF_GITACT}}
 
 jobs:
   plan:
@@ -52,7 +52,7 @@ jobs:
         id: deployment
         with:
           step: start
-          token: ${{ secrets.TF_API_TOKEN }}
+          token: ${{ secrets.TF_GITACT}}
           env: production
 
       - name: terraform apply
@@ -71,7 +71,7 @@ jobs:
         if: ${{ always() && steps.plan.outputs.tf_actions_plan_has_changes == 'true' }}
         with:
           step: finish
-          token: ${{ secrets.TF_API_TOKEN}}
+          token: ${{ secrets.TF_GITACT}}
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
