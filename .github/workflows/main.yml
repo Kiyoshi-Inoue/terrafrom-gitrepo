@@ -3,7 +3,7 @@ name: terraform plan
 on:
   push:
     branches:
-      - master
+      - main
 
 env:
   tf_version: '1.4.2'
