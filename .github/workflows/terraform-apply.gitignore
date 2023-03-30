@@ -5,11 +5,11 @@ on:
     branches:
       - master
     types: [closed]
+
 env:
   tf_version: '0.12.24'
   tf_work_dir: '.'
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  GITHUB_TOKEN: ${{ secrets.TF_API_TOKEN }}
 
 jobs:
   apply:
@@ -42,7 +42,7 @@ jobs:
         id: deployment
         with:
           step: start
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TF_API_TOKEN }}
           env: production
 
       - name: terraform apply
@@ -61,6 +61,6 @@ jobs:
         if: ${{ always() && steps.plan.outputs.tf_actions_plan_has_changes == 'true' }}
         with:
           step: finish
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TF_API_TOKEN}}
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}

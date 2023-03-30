@@ -1,6 +1,5 @@
 name: terraform plan
 
-# プルリクエストのOpen、更新、Reopen時にトリガー
 on:
   push:
     branches:
